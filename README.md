@@ -1,18 +1,43 @@
-# Diamond-Rush-Decomp
+# Diamond Rush-dev
 
-A decompilation of Gameloft's 2006 J2ME game, Diamond Rush. This is specifically the non-padlock version (v1.2.0) for the Sony Ericsson S700. The aim is not to get a bytecode identical decompilation but rather deobfuscate it enough for the code to be readable and logically identical to the original.
+A development fork of the decompiled Diamond Rush (Sony Ericsson S700, 240×320).
 
-## Building
+## Requirements
 
-### J2ME Setup
+- A JDK with `javac` and `jar` on `PATH` (tested with OpenJDK 17).
+- Java ME (`javax.microedition.*`) APIs configured on Java's `CLASSPATH`.
+- Bash and standard Unix utilities.
 
-- [Windows](https://nnp.nnchan.ru/wiki/?page=j2medevwin)
-- [Linux](https://nnp.nnchan.ru/wiki/?page=j2medevlinux)
+### Install dependencies (Ubuntu / Debian)
 
-You may need to add `ulimit -n 10000` to `KEmulator.sh` and `uei/emulator` if you get an error about memory on Linux. You may also have to set the executable flag of the executables (including in the `uei` folder) for nnmod to be detected as a device by Eclipse.
+Install the JDK and download tools:
 
-### Eclipse Setup
+```sh
+sudo apt install openjdk-17-jdk curl unzip
+```
 
-1. Create a new Java ME project
-2. Copy the contents of the repository to the root of the project directory
-3. If needed, create a new Run Configuration by going to Run > Configurations. You should be able to build and run the game via this configuration.
+Install [FreeJ2ME-Plus v1.52](https://github.com/TASEmulators/freej2me-plus/releases/tag/1.52) as a Java ME API library:
+
+```sh
+curl -fL -o /tmp/freej2me.zip https://github.com/TASEmulators/freej2me-plus/releases/download/1.52/freej2me-v1.52.zip
+unzip -p /tmp/freej2me.zip freej2me.jar > /tmp/freej2me.jar
+sudo install -Dm644 /tmp/freej2me.jar /usr/local/share/java/freej2me.jar
+export CLASSPATH=/usr/local/share/java/freej2me.jar
+```
+
+`PATH` is for executables like `javac` and `jar`; **`CLASSPATH` is for Java libraries**, such as the FreeJ2ME API JAR. Export `CLASSPATH` again in new terminal sessions, or add that export to your shell startup file. On other systems, install a JDK and a compatible Java ME API JAR, then set `CLASSPATH` to its location.
+
+## Build
+
+```sh
+git clone https://github.com/duyanhHSGS/Diamond-Rush.git
+cd Diamond-Rush
+./build.sh
+```
+
+The script only compiles and packages files. It does **not** install tools, download dependencies, or assume anyone's home directory. Outputs:
+
+- `build/Diamond-Rush-dev.jar`
+- `build/Diamond-Rush-dev.jad`
+
+**Compatibility:** Built with Java 7 class format for modern J2ME emulators. This is not a CLDC-preverified JAR for vintage physical phones.
