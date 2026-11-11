@@ -720,6 +720,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	public boolean field_435;
 	// $FF: renamed from: aa boolean
 	public boolean field_436;
+	private boolean noClipEnabled;
 	// $FF: renamed from: df int
 	public int debugScreenMode;
 	// $FF: renamed from: a int[]
@@ -4257,6 +4258,7 @@ public final class cGame extends GameCanvas implements Runnable {
 			var2.drawString(this.field_314, var1, 110, var5, 20);
 		}
 
+		var2.drawString(this.field_314, "1 - No Clip: " + (this.noClipEnabled ? "ON" : "OFF"), 110, 240, 17);
 		var1 = "Pound - Pass levels ";
 		StringBuffer var9;
 		String var10001;
@@ -7590,7 +7592,9 @@ public final class cGame extends GameCanvas implements Runnable {
 	// $FF: renamed from: aW () void
 	private void method_223() {
 		boolean var1 = false;
-		if (isKeyPressed(SKEY_POUND)) {
+		if (isKeyPressed(SKEY_NUM1)) {
+			this.noClipEnabled = !this.noClipEnabled;
+		} else if (isKeyPressed(SKEY_POUND)) {
 			this.field_436 = !this.field_436;
 		} else if (isKeyPressed(SKEY_NUM6)) {
 			this.collectedDiamonds += 50;
@@ -10985,6 +10989,25 @@ public final class cGame extends GameCanvas implements Runnable {
 
 	// $FF: renamed from: a (int, int, boolean) boolean
 	private boolean method_288(int var1, int var2, boolean var3) {
+		if (this.noClipEnabled) {
+			int nextX = this.playerXPos + var1;
+			int nextY = this.playerYPos + var2;
+			if (nextX <= 0 || nextX >= this.crtLevelWidth - 1 || nextY <= 0 || nextY >= this.crtLevelHeight - 1) {
+				return false;
+			}
+
+			if (!var3) {
+				int direction = var1 > 0 ? 2 : (var1 < 0 ? 4 : (var2 < 0 ? 1 : 3));
+				this.field_233 = this.field_233 & -8 | direction;
+				this.playerXPos = nextX;
+				this.playerYPos = nextY;
+				this.field_232 = 18;
+				this.field_208 = -1;
+				this.method_211(3 + this.field_197);
+			}
+			return true;
+		}
+
 		int var4 = 0; // NOTE: MODIFY TO MATCH PROCYON OUTPUT
 		int var5 = this.field_233;
 		int var6 = this.playerXPos;
