@@ -4219,27 +4219,27 @@ public final class cGame extends GameCanvas implements Runnable {
 				switch (i) {
 				case 0:
 					var4 = 60;
-					var10000 = " 6 - Add " + String.valueOf(this.collectedDiamonds);
+					var10000 = "6 - Add " + String.valueOf(this.collectedDiamonds);
 					break;
 				case 1:
 					var4 = 61;
-					var10000 = " 7 - Add " + String.valueOf(this.collectedRedDiamonds);
+					var10000 = "7 - Add " + String.valueOf(this.collectedRedDiamonds);
 					break;
 				case 2:
 					var4 = 62;
-					var10000 = " 8 - x " + String.valueOf(this.field_390) + (this.field_390 >= 4 ? " blue potion" : "");
+					var10000 = "8 - x " + String.valueOf(this.field_390) + (this.field_390 >= 4 ? " blue potion" : "");
 					break;
 				case 3:
 					var4 = 63;
-					var10000 = " 9 - " + menuText[this.field_391 ? 66 : 67];
+					var10000 = "9 - " + menuText[this.field_391 ? 66 : 67];
 					break;
 				case 4:
 					var4 = 64;
-					var10000 = " 0 - " + menuText[this.field_392 ? 66 : 67];
+					var10000 = "0 - " + menuText[this.field_392 ? 66 : 67];
 					break;
 				case 5:
 					var4 = -1;
-					var10000 = "5 to activate lang cheat";
+					var10000 = "5 - Debug (Mix / Tips)";
 					break;
 				default:
 					break label46;
@@ -4248,30 +4248,23 @@ public final class cGame extends GameCanvas implements Runnable {
 				var1 = var10000;
 			}
 
-			int var5 = i * 35;
+			int var5 = 12 + i * 35;
 			if (var4 >= 0) {
-				var2.drawString(this.field_314, menuText[var4], 110, var5, 17);
+				var2.drawString(this.field_314, menuText[var4], 10, var5, Graphics.TOP | Graphics.LEFT);
+				var5 += var2._nLineSpacing;
 			}
 
-			var5 += var2._nLineSpacing;
-			var2.drawString(this.field_314, menuText[65], 110, var5, 24);
-			var2.drawString(this.field_314, var1, 110, var5, 20);
+			var2.drawString(this.field_314, var1, 10, var5, Graphics.TOP | Graphics.LEFT);
 		}
 
-		var2.drawString(this.field_314, "1 - No Clip: " + (this.noClipEnabled ? "ON" : "OFF"), 110, 240, 17);
-		var1 = "Pound - Pass levels ";
-		StringBuffer var9;
-		String var10001;
-		if (this.field_436) {
-			var9 = (new StringBuffer()).append(var1);
-			var10001 = "on";
-		} else {
-			var9 = (new StringBuffer()).append(var1);
-			var10001 = "off";
-		}
-
-		var1 = var9.append(var10001).toString();
-		var2.drawString(this.field_314, var1, 110, 290, 17);
+		var2.drawString(this.field_314, "1 - No Clip: " + (this.noClipEnabled ? "ON" : "OFF"), 10, 240, Graphics.TOP | Graphics.LEFT);
+		// The sprite font has no hash glyph, so draw it directly.
+		this.field_314.setColor(0xFFFFFF);
+		this.field_314.drawLine(12, 289, 12, 300);
+		this.field_314.drawLine(16, 289, 16, 300);
+		this.field_314.drawLine(10, 293, 18, 293);
+		this.field_314.drawLine(10, 297, 18, 297);
+		var2.drawString(this.field_314, "- Pass levels: " + (this.field_436 ? "ON" : "OFF"), 22, 290, Graphics.TOP | Graphics.LEFT);
 		this.drawBackButton();
 		this.drawOKButton();
 	}

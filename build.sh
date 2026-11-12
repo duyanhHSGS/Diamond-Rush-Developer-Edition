@@ -5,6 +5,7 @@ cd "$(dirname "$0")"
 mkdir -p build
 rm -rf -- build/classes
 mkdir -p build/classes
+export CLASSPATH=/usr/local/share/java/freej2me.jar
 
 # JDK tools must be on PATH; Java ME APIs must be on CLASSPATH.
 javac -source 7 -target 7 -encoding UTF-8 -d build/classes src/*.java
