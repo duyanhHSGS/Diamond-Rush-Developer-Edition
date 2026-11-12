@@ -33,6 +33,9 @@ public final class cGame extends GameCanvas implements Runnable {
 	private static final int ENTITY_BROWN_SPIDER = 19;
 	private static final int ENTITY_RED_SPIDER = 43;
 	private static final int ENTITY_TURTLE = 49;
+	private static final int ENTITY_BLUE_BARRIER = 34;
+	private static final int ENTITY_RED_BARRIER = 35;
+	private static final int ENTITY_BARRIER_TOGGLE_SWITCH = 18;
 	private static final int ENEMY_STUN_MASK = 248;
 	private static final int ENEMY_STUN_DECREMENT = 8;
 	private static final int ENEMY_STUN_ON_HIT = 120;
@@ -8170,7 +8173,7 @@ public final class cGame extends GameCanvas implements Runnable {
 			var5 = true;
 			var7 = true;
 			break;
-		case 18:
+		case ENTITY_BARRIER_TOGGLE_SWITCH:
 			var5 = this.triggerBarrierToggleSwitch();
 			break;
 		case 30:
@@ -8451,14 +8454,14 @@ public final class cGame extends GameCanvas implements Runnable {
 							byte var7 = field_334[j][i];
 							if (var6 == 15) {
 								this.method_235(j, i);
-								field_334[j][i] = 34;
+								field_334[j][i] = ENTITY_BLUE_BARRIER;
 							} else if (var6 == 16) {
 								this.method_235(j, i);
-								field_334[j][i] = 35;
+								field_334[j][i] = ENTITY_RED_BARRIER;
 							} else {
-								if (var7 == 34) {
+								if (var7 == ENTITY_BLUE_BARRIER) {
 									field_332[j][i] = 15;
-								} else if (var7 == 35) {
+								} else if (var7 == ENTITY_RED_BARRIER) {
 									field_332[j][i] = 16;
 								} else {
 									continue;
