@@ -292,13 +292,13 @@ public final class cGame extends GameCanvas implements Runnable {
 	// $FF: renamed from: aH int
 	public int field_217;
 	// $FF: renamed from: aI int
-	public int field_218;
+	public int slowSpearExtensionPixels;
 	// $FF: renamed from: aJ int
-	public int field_219;
+	public int slowSpearHeightTiles;
 	// $FF: renamed from: aK int
-	public int field_220;
+	public int fastSpearExtensionPixels;
 	// $FF: renamed from: aL int
-	public int field_221;
+	public int fastSpearHeightTiles;
 	// $FF: renamed from: l byte
 	public static byte gameState = 0;
 	// $FF: renamed from: aM int
@@ -4822,7 +4822,7 @@ public final class cGame extends GameCanvas implements Runnable {
 									this.selectSpikedRollingBallSprite();
 									break label194;
 								case 16:
-									this.method_202();
+									this.selectKnightStatueSprite();
 									break label194;
 								case 18:
 									this.method_167();
@@ -6793,7 +6793,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: aJ () void
-	private void method_202() {
+	private void selectKnightStatueSprite() {
 		if (field_334[this.processedTileX][this.processedTileY + 1] != 16) {
 			int var1 = field_333[this.processedTileX][this.processedTileY];
 			ASprite var2;
@@ -7066,11 +7066,11 @@ public final class cGame extends GameCanvas implements Runnable {
 		int var4;
 		int var5;
 		if ((var3 & 8) == 0) {
-			var4 = this.field_219;
-			var5 = this.field_218;
+			var4 = this.slowSpearHeightTiles;
+			var5 = this.slowSpearExtensionPixels;
 		} else {
-			var4 = this.field_221;
-			var5 = this.field_220;
+			var4 = this.fastSpearHeightTiles;
+			var5 = this.fastSpearExtensionPixels;
 		}
 
 		for (int i = 0; i < var4; i++) {
@@ -8505,7 +8505,7 @@ public final class cGame extends GameCanvas implements Runnable {
 		}
 
 		if (field_320[11] != null) {
-			this.method_264();
+			this.updateGiantSpearCycles();
 		}
 
 		if (this.field_254 != 0 && this.field_252 != 0) {
@@ -9725,31 +9725,31 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: bo () void
-	private void method_264() {
+	private void updateGiantSpearCycles() {
 		int var1 = frameCounter % 89;
 		if (var1 < 15) {
-			this.field_218 = 0;
+			this.slowSpearExtensionPixels = 0;
 		} else if (var1 < 45) {
-			this.field_218 = 48 * (var1 - 15) / 30;
+			this.slowSpearExtensionPixels = 48 * (var1 - 15) / 30;
 		} else if (var1 < 60) {
-			this.field_218 = 48;
+			this.slowSpearExtensionPixels = 48;
 		} else {
-			this.field_218 = 48 - 48 * (var1 - 60) / 30;
+			this.slowSpearExtensionPixels = 48 - 48 * (var1 - 60) / 30;
 		}
 
 		var1 = frameCounter % 44;
-		this.field_219 = this.field_218 > 0 ? (this.field_218 - 1) / 24 + 2 : 1;
+		this.slowSpearHeightTiles = this.slowSpearExtensionPixels > 0 ? (this.slowSpearExtensionPixels - 1) / 24 + 2 : 1;
 		if (var1 < 7) {
-			this.field_220 = 0;
+			this.fastSpearExtensionPixels = 0;
 		} else if (var1 < 22) {
-			this.field_220 = 48 * (var1 - 7) / 15;
+			this.fastSpearExtensionPixels = 48 * (var1 - 7) / 15;
 		} else if (var1 < 30) {
-			this.field_220 = 48;
+			this.fastSpearExtensionPixels = 48;
 		} else {
-			this.field_220 = 48 - 48 * (var1 - 30) / 15;
+			this.fastSpearExtensionPixels = 48 - 48 * (var1 - 30) / 15;
 		}
 
-		this.field_221 = this.field_220 > 0 ? (this.field_220 - 1) / 24 + 2 : 1;
+		this.fastSpearHeightTiles = this.fastSpearExtensionPixels > 0 ? (this.fastSpearExtensionPixels - 1) / 24 + 2 : 1;
 	}
 
 	// $FF: renamed from: bp () void
@@ -11186,7 +11186,7 @@ public final class cGame extends GameCanvas implements Runnable {
 					label365: {
 						boolean b6; // NOTE: CHANGED BASED ON PROCYON OUTPUT
 						if (var13 != 0 && var14 != 0 && var13 != this.crtLevelWidth - 1 && var14 != this.crtLevelHeight - 1) {
-							if ((var1 != 0 && field_334[var13][var7 + 1] == 0 && (field_333[var13][var7 + 1] & 7) == 3 || this.field_218 >= 24 && (field_334[var13][var14 - 1] == 28 && (field_333[var13][var14 - 1] & 8) == 0 || field_334[var13][var14 + 1] == 28 && (field_333[var13][var14 + 1] & 8) == 0) || this.field_220 >= 24 && (field_334[var13][var14 - 1] == 28 || field_334[var13][var14 + 1] == 28)) && !var3) {
+							if ((var1 != 0 && field_334[var13][var7 + 1] == 0 && (field_333[var13][var7 + 1] & 7) == 3 || this.slowSpearExtensionPixels >= 24 && (field_334[var13][var14 - 1] == 28 && (field_333[var13][var14 - 1] & 8) == 0 || field_334[var13][var14 + 1] == 28 && (field_333[var13][var14 + 1] & 8) == 0) || this.fastSpearExtensionPixels >= 24 && (field_334[var13][var14 - 1] == 28 || field_334[var13][var14 + 1] == 28)) && !var3) {
 								var8 = 0;
 								break label365;
 							} // FIXME: IF STATEMENTS MAY BE STRUCTURED WRONG, CHECK PROCYON OUTPUT
@@ -12733,7 +12733,7 @@ public final class cGame extends GameCanvas implements Runnable {
 							this.updateSpikedRollingBall();
 							break label215;
 						case 16:
-							this.method_337();
+							this.updateKnightStatue();
 							break label215;
 						case ENTITY_BROWN_SPIDER:
 							this.updatePatrollingEnemy((byte)ENTITY_BROWN_SPIDER);
@@ -12750,16 +12750,16 @@ public final class cGame extends GameCanvas implements Runnable {
 							var10001 = 23;
 							break;
 						case 24:
-							this.method_328(24);
+							this.collectToolUpgrade(24);
 							break label215;
 						case 26:
-							this.method_328(26);
+							this.collectToolUpgrade(26);
 							break label215;
 						case 27:
-							this.method_328(27);
+							this.collectToolUpgrade(27);
 							break label215;
 						case 28:
-							this.method_338();
+							this.applyGiantSpearTipCollision();
 							break label215;
 						case 30:
 							this.method_329();
@@ -13785,7 +13785,7 @@ public final class cGame extends GameCanvas implements Runnable {
 
 	// $FF: renamed from: h (int, int) boolean
 	private boolean method_323(int var1, int var2) {
-		return field_334[var1][var2] == 28 || this.field_218 >= 24 && (field_334[var1][var2 - 1] == 28 && (field_333[var1][var2 - 1] & 8) == 0 || field_334[var1][var2 + 1] == 28 && (field_333[var1][var2 + 1] & 8) == 0) || this.field_220 >= 24 && (field_334[var1][var2 - 1] == 28 || field_334[var1][var2 + 1] == 28);
+		return field_334[var1][var2] == 28 || this.slowSpearExtensionPixels >= 24 && (field_334[var1][var2 - 1] == 28 && (field_333[var1][var2 - 1] & 8) == 0 || field_334[var1][var2 + 1] == 28 && (field_333[var1][var2 + 1] & 8) == 0) || this.fastSpearExtensionPixels >= 24 && (field_334[var1][var2 - 1] == 28 || field_334[var1][var2 + 1] == 28);
 	}
 
 	// $FF: renamed from: a (int, int, int, int, boolean) int
@@ -14068,7 +14068,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: y (int) void
-	private void method_328(int var1) {
+	private void collectToolUpgrade(int var1) {
 		if ((field_332[this.field_279][this.field_280] & 255) != 14 || field_332[this.field_279][this.field_280] >> 8 != 255) {
 			if (this.method_298(this.field_279, this.field_280) && (field_323[0]._nCrtAnim == 40 || field_323[0]._nCrtAnim == 48)) {
 				label23: {
@@ -14660,7 +14660,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: ca () void
-	private void method_337() {
+	private void updateKnightStatue() {
 		int var1 = this.field_279;
 		int var2 = this.field_280;
 		byte var3;
@@ -14710,10 +14710,10 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: cb () void
-	private void method_338() {
+	private void applyGiantSpearTipCollision() {
 		int var1;
 		int var2 = ((var1 = field_333[this.field_279][this.field_280]) & 7) == 3 ? 1 : -1;
-		int var3 = (var1 & 8) == 0 ? this.field_219 : this.field_221;
+		int var3 = (var1 & 8) == 0 ? this.slowSpearHeightTiles : this.fastSpearHeightTiles;
 		int var5 = this.field_280 + (var3 - 1) * var2;
 		if (this.method_298(this.field_279, var5)) {
 			this.method_61(2, 48, field_326[this.field_233 & 7]);
