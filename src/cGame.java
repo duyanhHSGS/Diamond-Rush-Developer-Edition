@@ -187,7 +187,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	// $FF: renamed from: T int
 	public int field_163;
 	// $FF: renamed from: h byte
-	public byte field_164;
+	public byte savedWaterBreathingUpgrade;
 	// $FF: renamed from: k boolean
 	public static boolean vibrationEnabled;
 	// $FF: renamed from: U int
@@ -12640,7 +12640,7 @@ public final class cGame extends GameCanvas implements Runnable {
 								break label195;
 							}
 
-							var12.method_339();
+							var12.checkKeyholeInteraction();
 						}
 
 						if ((field_332[this.field_279][this.field_280] & -268435456) >> 28 > 0) {
@@ -12768,7 +12768,7 @@ public final class cGame extends GameCanvas implements Runnable {
 							this.updateWeakWallChainReaction();
 							break label215;
 						case 32:
-							this.method_333();
+							this.updateMysticalHookProjectile();
 							break label215;
 						case 36:
 							this.updateTorch();
@@ -14324,7 +14324,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: bX () void
-	private void method_333() {
+	private void updateMysticalHookProjectile() {
 		int var1 = this.field_279;
 		int var2 = this.field_280;
 		field_336[var1][var2] = 24;
@@ -14736,7 +14736,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: cc () void
-	private void method_339() {
+	private void checkKeyholeInteraction() {
 		int var1 = this.field_279;
 		int var2 = this.field_280;
 		int var3 = field_332[var1][var2] >> 8;
@@ -14936,7 +14936,7 @@ public final class cGame extends GameCanvas implements Runnable {
 
 	// $FF: renamed from: cf () void
 	private void method_346() {
-		this.field_164 = recordData[10];
+		this.savedWaterBreathingUpgrade = recordData[10];
 		this.field_313 = this.barrierToggleDirection;
 		this.field_312 = this.barrierToggleProgress;
 		this.field_166 = this.field_156;
@@ -14990,7 +14990,7 @@ public final class cGame extends GameCanvas implements Runnable {
 
 		this.field_189 = false;
 		this.field_194 = 70;
-		recordData[10] = this.field_164;
+		recordData[10] = this.savedWaterBreathingUpgrade;
 		this.field_156 = this.field_166;
 		this.barrierToggleDirection = this.field_313;
 		this.barrierToggleProgress = this.field_312;
