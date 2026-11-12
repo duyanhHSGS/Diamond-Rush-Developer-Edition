@@ -1,17 +1,29 @@
-Diamond Rush Map Data Format (2026-7-12)
+Diamond Rush map format — reverse-engineering notes
 
-## Header
+Bundled worlds: res/w0.bin (Angkor Wat), res/w1.bin (Bavaria), res/w2.bin (Tibet).
 
-Data Size (u16)
-Amount of Nodes (u8)
+## World-file layout (observed)
 
-node data format? (after already parsed and being rendered?):
+- Initial byte: read and discarded; meaning unknown.
+- Next byte: number of level records in the following group.
+- Per level: width (u16 little-endian), height (u16 little-endian), then three arrays of width * height bytes.
+- Array index: x + y * width.
+  1. Entity/object data -> field_334[x][y] (signed byte).
+  2. Tile metadata -> field_333[x][y].
+  3. Visual/terrain data -> field_332[x][y].
+- Game initialization can modify the loaded arrays.
 
+## Hidden Walls cheat
 
-Level Status Flag Format:
-Bit 1 = Level Unlocked?
-Bit 2 = All Diamonds Collected
-Bit 3 = All Red Diamonds Collected
-Bit 4 = Completed Without Taking Damage
-Bit 5 = Completed Without Dying
+In cGame.method_153(), when the switch is ON, visual overlays are skipped if:
 
+  field_334[x][y] == -1 && (field_332[x][y] & 255) >= 80 && (field_332[x][y] & 255) < 128
+
+This works across all worlds without changing collisions or map data. Some decorations also disappear; matching the condition does not prove a secret passage.
+
+Angkor Wat Stage 8 (w0.bin, level index 7): eight candidate 0x69 cover tiles at x=12..15, y=2 and x=11..14, y=24.
+
+## Earlier unverified notes
+
+Possible additional header fields: data size (u16), node count (u8); node format unknown.
+Level-status bits noted previously: 1=unlocked?, 2=all diamonds, 3=all red diamonds, 4=no damage, 5=no deaths. These meanings still need verification.
