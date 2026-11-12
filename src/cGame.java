@@ -4819,7 +4819,7 @@ public final class cGame extends GameCanvas implements Runnable {
 									this.method_161();
 									break label194;
 								case 14:
-									this.method_201();
+									this.selectSpikedRollingBallSprite();
 									break label194;
 								case 16:
 									this.method_202();
@@ -6758,7 +6758,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: aI () void
-	private void method_201() {
+	private void selectSpikedRollingBallSprite() {
 		int var1 = frameCounter;
 		int var2 = field_333[this.processedTileX][this.processedTileY];
 		byte var3;
@@ -12730,7 +12730,7 @@ public final class cGame extends GameCanvas implements Runnable {
 							this.method_331();
 							break label215;
 						case 14:
-							this.method_336();
+							this.updateSpikedRollingBall();
 							break label215;
 						case 16:
 							this.method_337();
@@ -14577,84 +14577,84 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: bZ () void
-	private void method_336() {
-		int var1 = this.field_279;
-		int var2 = this.field_280;
-		int var3;
-		int var4 = ((var3 = field_333[var1][var2]) & 0xFF00) >> 8;
-		int var5 = (var3 & 8) != 0 ? 4 : 2;
-		if (var4 >= 20) {
-			if (method_310(var1, var2 + 1) || var5 == 4 && (field_334[var1 - 1][var2] < 0 || field_334[var1 - 1][var2] == 16 || field_334[var1 - 1][var2] == 19 || field_334[var1 - 1][var2] == 43) || var5 == 2 && (field_334[var1 + 1][var2] < 0 || field_334[var1 + 1][var2] == 16 || field_334[var1 + 1][var2] == 19 || field_334[var1 + 1][var2] == 43)) {
-				field_333[var1][var2] = var3 & -65281 | 4864;
+	private void updateSpikedRollingBall() {
+		int ballTileX = this.field_279;
+		int ballTileY = this.field_280;
+		int ballState;
+		int startDelayTicks = ((ballState = field_333[ballTileX][ballTileY]) & 0xFF00) >> 8;
+		int movementDirection = (ballState & 8) != 0 ? 4 : 2;
+		if (startDelayTicks >= 20) {
+			if (method_310(ballTileX, ballTileY + 1) || movementDirection == 4 && (field_334[ballTileX - 1][ballTileY] < 0 || field_334[ballTileX - 1][ballTileY] == 16 || field_334[ballTileX - 1][ballTileY] == 19 || field_334[ballTileX - 1][ballTileY] == 43) || movementDirection == 2 && (field_334[ballTileX + 1][ballTileY] < 0 || field_334[ballTileX + 1][ballTileY] == 16 || field_334[ballTileX + 1][ballTileY] == 19 || field_334[ballTileX + 1][ballTileY] == 43)) {
+				field_333[ballTileX][ballTileY] = ballState & -65281 | 4864;
 			}
 		} else {
 			label79: {
 				byte[] var10000;
 				int var10001;
 				byte var10002;
-				if (var4 > 0) {
-					field_333[var1][var2] = var3 & -65281 | var4 - 1 << 8;
-					var10000 = field_336[var1];
-					var10001 = var2;
+				if (startDelayTicks > 0) {
+					field_333[ballTileX][ballTileY] = ballState & -65281 | startDelayTicks - 1 << 8;
+					var10000 = field_336[ballTileX];
+					var10001 = ballTileY;
 					var10002 = 24;
 				} else {
-					byte var6;
-					if ((var6 = field_335[var1][var2]) <= 0) {
-						int var7 = var1;
-						int var8 = var2;
-						if (method_310(var1, var2 + 1)) {
-							var8 = var2 + 1;
-							var5 = 3;
+					byte movementOffset;
+					if ((movementOffset = field_335[ballTileX][ballTileY]) <= 0) {
+						int nextTileX = ballTileX;
+						int nextTileY = ballTileY;
+						if (method_310(ballTileX, ballTileY + 1)) {
+							nextTileY = ballTileY + 1;
+							movementDirection = 3;
 						} else {
 							label111: {
-								if (var5 == 4) {
-									if (method_310(var1 - 1, var2)) {
-										var7 = var1 - 1;
+								if (movementDirection == 4) {
+									if (method_310(ballTileX - 1, ballTileY)) {
+										nextTileX = ballTileX - 1;
 										break label111;
 									}
 
-									var5 = 0;
-									if (field_334[var1 - 1][var2] == 16 || field_334[var1 - 1][var2] == 19 || field_334[var1 - 1][var2] == 43) {
+									movementDirection = 0;
+									if (field_334[ballTileX - 1][ballTileY] == 16 || field_334[ballTileX - 1][ballTileY] == 19 || field_334[ballTileX - 1][ballTileY] == 43) {
 										break label111;
 									}
 								} else {
-									if (method_310(var1 + 1, var2)) {
-										var7 = var1 + 1;
+									if (method_310(ballTileX + 1, ballTileY)) {
+										nextTileX = ballTileX + 1;
 										break label111;
 									}
 
-									var5 = 0;
-									if (field_334[var1 + 1][var2] == 16 || field_334[var1 + 1][var2] == 19 || field_334[var1 + 1][var2] == 43) {
+									movementDirection = 0;
+									if (field_334[ballTileX + 1][ballTileY] == 16 || field_334[ballTileX + 1][ballTileY] == 19 || field_334[ballTileX + 1][ballTileY] == 43) {
 										break label111;
 									}
 								}
 
-								var3 = var3 & -65281 | 5120;
+								ballState = ballState & -65281 | 5120;
 							}
 						}
 
-						if (var7 != var1 || var8 != var2) {
-							field_334[var7][var8] = 14;
-							method_345(var7, var8);
-							field_334[var1][var2] = -1;
-							field_335[var7][var8] = 18;
+						if (nextTileX != ballTileX || nextTileY != ballTileY) {
+							field_334[nextTileX][nextTileY] = 14;
+							method_345(nextTileX, nextTileY);
+							field_334[ballTileX][ballTileY] = -1;
+							field_335[nextTileX][nextTileY] = 18;
 						}
 
-						field_333[var7][var8] = var3 & -8 | var5;
+						field_333[nextTileX][nextTileY] = ballState & -8 | movementDirection;
 						break label79;
 					}
 
-					var10000 = field_335[var1];
-					var10001 = var2;
-					var10002 = (byte)(var6 - 6);
+					var10000 = field_335[ballTileX];
+					var10001 = ballTileY;
+					var10002 = (byte)(movementOffset - 6);
 				}
 
 				var10000[var10001] = var10002;
 			}
 		}
 
-		if (this.method_298(var1, var2)) {
-			this.method_61(1, 48, var5);
+		if (this.method_298(ballTileX, ballTileY)) {
+			this.method_61(1, 48, movementDirection);
 		}
 
 	}
