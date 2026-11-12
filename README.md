@@ -25,7 +25,7 @@ sudo install -Dm644 /tmp/freej2me.jar /usr/local/share/java/freej2me.jar
 export CLASSPATH=/usr/local/share/java/freej2me.jar
 ```
 
-`PATH` is for executables like `javac` and `jar`; **`CLASSPATH` is for Java libraries**, such as the FreeJ2ME API JAR. Export `CLASSPATH` again in new terminal sessions, or add that export to your shell startup file. On other systems, install a JDK and a compatible Java ME API JAR, then set `CLASSPATH` to its location.
+ On other systems, install a JDK and a compatible Java ME API JAR, then set `CLASSPATH` to its location.
 
 ## Build
 

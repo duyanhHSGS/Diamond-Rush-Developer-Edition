@@ -721,6 +721,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	// $FF: renamed from: aa boolean
 	public boolean field_436;
 	private boolean noClipEnabled;
+	private boolean revealHiddenWalls;
 	// $FF: renamed from: df int
 	public int debugScreenMode;
 	// $FF: renamed from: a int[]
@@ -4258,6 +4259,7 @@ public final class cGame extends GameCanvas implements Runnable {
 		}
 
 		var2.drawString(this.field_314, "1 - No Clip: " + (this.noClipEnabled ? "ON" : "OFF"), 10, 240, Graphics.TOP | Graphics.LEFT);
+		var2.drawString(this.field_314, "2 - Hidden Walls: " + (this.revealHiddenWalls ? "ON" : "OFF"), 10, 266, Graphics.TOP | Graphics.LEFT);
 		// The sprite font has no hash glyph, so draw it directly.
 		this.field_314.setColor(0xFFFFFF);
 		this.field_314.drawLine(12, 289, 12, 300);
@@ -5080,6 +5082,11 @@ public final class cGame extends GameCanvas implements Runnable {
 					if (var37 >= 0 && var37 < this.crtLevelWidth && var39 >= 0 && var39 < this.crtLevelHeight) {
 						var5 = field_332[var37][var39] & 255;
 						var6 = field_334[var37][var39];
+						// Hide decorative tile overlays on empty cells in every world.
+						// Render only: terrain, collisions, and secret entrances are unchanged.
+						if (this.revealHiddenWalls && var6 == -1 && var5 >= 80 && var5 < 128) {
+							continue;
+						}
 						if (var5 < 38 || var5 >= 80) {
 							int var10;
 							int var11;
@@ -7587,6 +7594,8 @@ public final class cGame extends GameCanvas implements Runnable {
 		boolean var1 = false;
 		if (isKeyPressed(SKEY_NUM1)) {
 			this.noClipEnabled = !this.noClipEnabled;
+		} else if (isKeyPressed(SKEY_NUM2)) {
+			this.revealHiddenWalls = !this.revealHiddenWalls;
 		} else if (isKeyPressed(SKEY_POUND)) {
 			this.field_436 = !this.field_436;
 		} else if (isKeyPressed(SKEY_NUM6)) {
