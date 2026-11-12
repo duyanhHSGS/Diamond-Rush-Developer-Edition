@@ -10188,7 +10188,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: l (int, int) void
-	private static void method_271(int var0, int var1) {
+	private static void clearBossHazardTiles(int var0, int var1) {
 		if (var0 >= 0 && var1 >= 0) {
 			field_334[var0][var1] = -1;
 			field_334[var0 + 1][var1] = -1;
@@ -10196,7 +10196,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: m (int, int) void
-	private static void method_272(int var0, int var1) {
+	private static void placeBossHazardTiles(int var0, int var1) {
 		if (var0 >= 0 && var1 >= 0) {
 			field_334[var0][var1] = 50;
 			field_334[var0 + 1][var1] = 50;
@@ -10308,7 +10308,7 @@ public final class cGame extends GameCanvas implements Runnable {
 				this.field_181 = 0;
 			} else if (this.field_181 > 20) {
 				this.method_273(var5, 8);
-				method_272(var5, 8);
+				placeBossHazardTiles(var5, 8);
 				this.field_133 = var5;
 				this.field_134 = 8;
 			}
@@ -10318,7 +10318,7 @@ public final class cGame extends GameCanvas implements Runnable {
 			if (this.method_273(var5, 8)) {
 				this.field_182--;
 				this.field_139 = this.field_180;
-				method_271(this.field_133, this.field_134);
+				clearBossHazardTiles(this.field_133, this.field_134);
 				this.field_133 = -1;
 				this.field_134 = -1;
 				this.field_139 = this.field_180;
@@ -10335,7 +10335,7 @@ public final class cGame extends GameCanvas implements Runnable {
 				this.field_180 = 4;
 				this.field_181 = 0;
 				var2 = 0;
-				method_271(this.field_133, this.field_134);
+				clearBossHazardTiles(this.field_133, this.field_134);
 				this.field_133 = -1;
 				this.field_134 = -1;
 			}
@@ -10381,7 +10381,7 @@ public final class cGame extends GameCanvas implements Runnable {
 				this.field_180 = 10;
 				this.field_133 = var5;
 				this.field_134 = 4;
-				method_272(this.field_133, this.field_134);
+				placeBossHazardTiles(this.field_133, this.field_134);
 			}
 
 			this.method_276();
@@ -10395,7 +10395,7 @@ public final class cGame extends GameCanvas implements Runnable {
 			}
 			break;
 		case 7:
-			method_271(this.field_133, this.field_134);
+			clearBossHazardTiles(this.field_133, this.field_134);
 			this.field_133 = -1;
 			this.field_134 = -1;
 			if (this.field_181 > 80) {
@@ -10432,7 +10432,7 @@ public final class cGame extends GameCanvas implements Runnable {
 			if (this.field_132 >= 50) {
 				this.field_132 = 0;
 				this.field_180 = 11;
-				method_271(this.field_133, this.field_134);
+				clearBossHazardTiles(this.field_133, this.field_134);
 				this.field_133 = -1;
 				this.field_134 = -1;
 				var2 = 8;
@@ -12762,7 +12762,7 @@ public final class cGame extends GameCanvas implements Runnable {
 							this.applyGiantSpearTipCollision();
 							break label215;
 						case 30:
-							this.method_329();
+							this.updateWeakWallChainReaction();
 							break label215;
 						case 32:
 							this.method_333();
@@ -12796,7 +12796,7 @@ public final class cGame extends GameCanvas implements Runnable {
 							break label215;
 						case 47:
 							this.method_351();
-							this.method_311();
+							this.extendWindJarUpdraft();
 							break label215;
 						case 48:
 							if ((field_333[this.field_279][this.field_280] & 8) == 0) {
@@ -13041,7 +13041,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: bI () void
-	private void method_311() {
+	private void extendWindJarUpdraft() {
 		int var1 = this.field_280 - 1;
 		boolean var2 = field_500 != null && field_500[this.field_279][this.field_280] != 0 && field_500[this.field_279][this.field_280 - 1] == 0;
 		if ((field_333[this.field_279][this.field_280] & 7) == 0 && (field_332[this.field_279][var1] & 255) != 35 && method_308(this.field_279, var1) && (!this.method_298(this.field_279 - 1, this.field_280) && !this.method_298(this.field_279 + 1, this.field_280) || (this.field_233 & 8) == 0) && (field_334[this.field_279][this.field_280 + 1] >= 0 || var2)) {
@@ -14111,7 +14111,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: bT () void
-	private void method_329() {
+	private void updateWeakWallChainReaction() {
 		int var1 = field_333[this.field_279][this.field_280];
 		if (var1 > 0) {
 			int var2 = this.field_279;
