@@ -476,9 +476,9 @@ public final class cGame extends GameCanvas implements Runnable {
 	// $FF: renamed from: A boolean
 	public boolean field_309;
 	// $FF: renamed from: ce int
-	public int field_310;
+	public int barrierToggleProgress;
 	// $FF: renamed from: cf int
-	public int field_311;
+	public int barrierToggleDirection;
 	// $FF: renamed from: cg int
 	public int field_312;
 	// $FF: renamed from: ch int
@@ -4546,15 +4546,15 @@ public final class cGame extends GameCanvas implements Runnable {
 							this.field_288 = this.field_289 = 0;
 							break;
 						case 15:
-							if (this.field_310 == 0) {
+							if (this.barrierToggleProgress == 0) {
 								this.field_214 = 14;
-								this.field_215 = 0 + this.field_310 * 5 / 10;
+								this.field_215 = 0 + this.barrierToggleProgress * 5 / 10;
 							}
 							break;
 						case 16:
-							if (this.field_310 == 9) {
+							if (this.barrierToggleProgress == 9) {
 								this.field_214 = 15;
-								this.field_215 = 4 - this.field_310 * 5 / 10;
+								this.field_215 = 4 - this.barrierToggleProgress * 5 / 10;
 								if (this.field_215 < 0) {
 									this.field_215 = 0;
 								}
@@ -4604,15 +4604,15 @@ public final class cGame extends GameCanvas implements Runnable {
 								field_320[16].drawFrame(var14, 0, this.field_271, this.field_272, 0, 0, 0);
 								break;
 							case 34:
-								if (this.field_310 == 9) {
+								if (this.barrierToggleProgress == 9) {
 									this.field_216 = 14;
-									this.field_217 = 0 + this.field_310 * 5 / 10;
+									this.field_217 = 0 + this.barrierToggleProgress * 5 / 10;
 								}
 								break;
 							case 35:
-								if (this.field_310 == 0) {
+								if (this.barrierToggleProgress == 0) {
 									this.field_216 = 15;
-									this.field_217 = 4 - this.field_310 * 5 / 10;
+									this.field_217 = 4 - this.barrierToggleProgress * 5 / 10;
 									if (this.field_217 < 0) {
 										this.field_217 = 0;
 									}
@@ -4714,15 +4714,15 @@ public final class cGame extends GameCanvas implements Runnable {
 							this.method_165(this.field_284);
 							break;
 						case 15:
-							if (this.field_310 != 0 && this.field_310 <= 5) {
+							if (this.barrierToggleProgress != 0 && this.barrierToggleProgress <= 5) {
 								this.field_214 = 14;
-								this.field_215 = 0 + this.field_310 * 5 / 10;
+								this.field_215 = 0 + this.barrierToggleProgress * 5 / 10;
 							}
 							break;
 						case 16:
-							if (this.field_310 != 9 && this.field_310 >= 5) {
+							if (this.barrierToggleProgress != 9 && this.barrierToggleProgress >= 5) {
 								this.field_214 = 15;
-								this.field_215 = 4 - this.field_310 * 5 / 10;
+								this.field_215 = 4 - this.barrierToggleProgress * 5 / 10;
 								if (this.field_215 < 0) {
 									this.field_215 = 0;
 								}
@@ -4825,7 +4825,7 @@ public final class cGame extends GameCanvas implements Runnable {
 									this.selectKnightStatueSprite();
 									break label194;
 								case 18:
-									this.method_167();
+									this.selectBarrierToggleSwitchSprite();
 									break label194;
 								case 19:
 									this.method_194((byte)this.field_283);
@@ -4855,22 +4855,22 @@ public final class cGame extends GameCanvas implements Runnable {
 									this.method_198();
 									break label194;
 								case 34:
-									if (this.field_310 != 9 && this.field_310 >= 5) {
+									if (this.barrierToggleProgress != 9 && this.barrierToggleProgress >= 5) {
 										this.field_216 = 14;
-										this.field_217 = 0 + this.field_310 * 5 / 10;
+										this.field_217 = 0 + this.barrierToggleProgress * 5 / 10;
 									}
 									break label194;
 								case 35:
-									if (this.field_310 != 0 && this.field_310 <= 5) {
+									if (this.barrierToggleProgress != 0 && this.barrierToggleProgress <= 5) {
 										this.field_216 = 15;
-										this.field_217 = 4 - this.field_310 * 5 / 10;
+										this.field_217 = 4 - this.barrierToggleProgress * 5 / 10;
 										if (this.field_217 < 0) {
 											this.field_217 = 0;
 										}
 									}
 									break label194;
 								case 36:
-									this.method_168();
+									this.selectTorchSprite();
 									break label194;
 								case 37:
 									this.field_216 = 17;
@@ -5678,20 +5678,20 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: ai () void
-	private void method_167() {
+	private void selectBarrierToggleSwitchSprite() {
 		field_324 = field_320[6];
 		this.field_285 = 0;
-		if (this.field_310 == 0) {
+		if (this.barrierToggleProgress == 0) {
 			this.field_286 = 0;
-		} else if (this.field_310 == 9) {
+		} else if (this.barrierToggleProgress == 9) {
 			this.field_286 = 2;
 		} else {
-			this.field_286 = this.field_311 < 0 ? 1 : 3;
+			this.field_286 = this.barrierToggleDirection < 0 ? 1 : 3;
 		}
 	}
 
 	// $FF: renamed from: aj () void
-	private void method_168() {
+	private void selectTorchSprite() {
 		int var1 = field_333[this.processedTileX][this.processedTileY] == 1 ? 1 : 0;
 		ASprite var2 = field_320[5];
 		var2.drawAnimFrame(this.field_314, var1, (frameCounter >> 1) % var2.getAnimFrames(var1), this.field_271, this.field_272, 0, 0, 0);
@@ -8171,7 +8171,7 @@ public final class cGame extends GameCanvas implements Runnable {
 			var7 = true;
 			break;
 		case 18:
-			var5 = this.method_232();
+			var5 = this.triggerBarrierToggleSwitch();
 			break;
 		case 30:
 			var5 = true;
@@ -8291,12 +8291,12 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: c () boolean
-	private boolean method_232() {
+	private boolean triggerBarrierToggleSwitch() {
 		if (this.field_487 == 3) {
 			int var1 = field_332[this.playerXPos][this.playerYPos] & 255;
-			if (this.field_311 == 0 && var1 != 15 && var1 != 16) {
+			if (this.barrierToggleDirection == 0 && var1 != 15 && var1 != 16) {
 				this.method_433(cSoundEngine.SOUND_SFX_SWITCH);
-				this.field_311 = (this.field_310 <= 0) ? 1 : -1;
+				this.barrierToggleDirection = (this.barrierToggleProgress <= 0) ? 1 : -1;
 			}
 
 			return true;
@@ -8438,10 +8438,10 @@ public final class cGame extends GameCanvas implements Runnable {
 			this.method_265();
 		}
 
-		if (this.field_311 != 0 && (frameCounter >> 1 & 1) == 0) {
-			this.field_310 += this.field_311;
-			if (this.field_310 != 0 && this.field_310 != 9) {
-				if (this.field_310 == 5) {
+		if (this.barrierToggleDirection != 0 && (frameCounter >> 1 & 1) == 0) {
+			this.barrierToggleProgress += this.barrierToggleDirection;
+			if (this.barrierToggleProgress != 0 && this.barrierToggleProgress != 9) {
+				if (this.barrierToggleProgress == 5) {
 					int var12 = this.crtLevelHeight - 1;
 					int var16 = this.crtLevelWidth - 1;
 
@@ -8465,7 +8465,7 @@ public final class cGame extends GameCanvas implements Runnable {
 								}
 
 								field_334[j][i] = -1;
-								this.method_397(j, i);
+								this.checkForWaterInflow(j, i);
 							}
 
 							method_345(j, i);
@@ -8473,7 +8473,7 @@ public final class cGame extends GameCanvas implements Runnable {
 					}
 				}
 			} else {
-				this.field_311 = 0;
+				this.barrierToggleDirection = 0;
 
 				for (int i = 1; i < this.crtLevelHeight - 1; i++) {
 					for (int j = 1; j < this.crtLevelWidth - 1; j++) {
@@ -10752,8 +10752,8 @@ public final class cGame extends GameCanvas implements Runnable {
 				}
 			}
 
-			if (this.field_310 == 5) {
-					if (this.field_311 <= 0) {
+			if (this.barrierToggleProgress == 5) {
+					if (this.barrierToggleDirection <= 0) {
 						if (this.field_182 <= 2) {
 							field_334[10][16] = 45;
 							field_336[10][16] = 24;
@@ -11564,7 +11564,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: bC () void
-	private void method_293() {
+	private void initializeWaterVentSources() {
 		if (this.field_155) {
 			for (int var1 = 0; var1 < this.crtLevelWidth; ++var1) {
 				for (int var2 = 0; var2 < this.crtLevelHeight; ++var2) {
@@ -11900,8 +11900,8 @@ public final class cGame extends GameCanvas implements Runnable {
 					this.field_327 |= (1L << 13);
 					continue;
 				case 18:
-					this.field_310 = 0;
-					this.field_311 = 0;
+					this.barrierToggleProgress = 0;
+					this.barrierToggleDirection = 0;
 					this.field_327 |= (1L << 39);
 					this.field_327 |= (1L << 7);
 					continue;
@@ -12768,10 +12768,10 @@ public final class cGame extends GameCanvas implements Runnable {
 							this.method_333();
 							break label215;
 						case 36:
-							this.method_318();
+							this.updateTorch();
 							break label215;
 						case 37:
-							this.method_330();
+							this.updateBlastableWall();
 							break label215;
 						case 40:
 							this.method_322(40);
@@ -13308,7 +13308,7 @@ public final class cGame extends GameCanvas implements Runnable {
 						impactStopsFall = false;
 						break;
 					case 18:
-						this.method_232();
+						this.triggerBarrierToggleSwitch();
 						break;
 					case 19:
 					case 43:
@@ -13479,7 +13479,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: bO () void
-	private void method_318() {
+	private void updateTorch() {
 		int var1 = this.field_279;
 		int var2 = this.field_280;
 		if (field_333[var1][var2] == 0) {
@@ -14137,13 +14137,13 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: bU () void
-	private void method_330() {
+	private void updateBlastableWall() {
 		int var1 = this.field_279;
 		int var2 = this.field_280;
 		int var3;
 		if ((var3 = field_333[var1][var2]) > 0) {
 			if (var3 >= 8) {
-				this.method_397(var1, var2);
+				this.checkForWaterInflow(var1, var2);
 				field_334[var1][var2] = -1;
 				method_345(var1, var2);
 			}
@@ -14314,7 +14314,7 @@ public final class cGame extends GameCanvas implements Runnable {
 			field_334[var1][var2] = -1;
 			field_332[var1][var2] = 32;
 			method_345(var1, var2);
-			this.method_397(var1, var2);
+			this.checkForWaterInflow(var1, var2);
 			field_336[var1][var2] = 24;
 		}
 
@@ -14934,8 +14934,8 @@ public final class cGame extends GameCanvas implements Runnable {
 	// $FF: renamed from: cf () void
 	private void method_346() {
 		this.field_164 = recordData[10];
-		this.field_313 = this.field_311;
-		this.field_312 = this.field_310;
+		this.field_313 = this.barrierToggleDirection;
+		this.field_312 = this.barrierToggleProgress;
 		this.field_166 = this.field_156;
 		this.field_300 = this.field_207;
 		this.field_298 = this.collectedDiamonds;
@@ -14989,8 +14989,8 @@ public final class cGame extends GameCanvas implements Runnable {
 		this.field_194 = 70;
 		recordData[10] = this.field_164;
 		this.field_156 = this.field_166;
-		this.field_311 = this.field_313;
-		this.field_310 = this.field_312;
+		this.barrierToggleDirection = this.field_313;
+		this.barrierToggleProgress = this.field_312;
 		this.field_207 = this.field_300;
 		this.collectedRedDiamonds = this.field_299;
 		this.collectedDiamonds = this.field_298;
@@ -15791,7 +15791,7 @@ public final class cGame extends GameCanvas implements Runnable {
 		if (this.field_155) {
 			this.method_371();
 			field_500 = new int[this.crtLevelWidth][this.crtLevelHeight];
-			this.method_293();
+			this.initializeWaterVentSources();
 		}
 
 	}
@@ -16719,7 +16719,7 @@ public final class cGame extends GameCanvas implements Runnable {
 	}
 
 	// $FF: renamed from: t (int, int) void
-	private void method_397(int var1, int var2) {
+	private void checkForWaterInflow(int var1, int var2) {
 		if (this.field_155) {
 			this.field_483 = field_500[var1 - 1][var2] != 0 ? -1 : (field_500[var1 + 1][var2] != 0 ? 1 : 0);
 			if (this.field_483 == 0) {
