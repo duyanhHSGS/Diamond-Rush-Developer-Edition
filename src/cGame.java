@@ -33,6 +33,9 @@ public final class cGame extends GameCanvas implements Runnable {
 	private static final int ENTITY_BROWN_SPIDER = 19;
 	private static final int ENTITY_RED_SPIDER = 43;
 	private static final int ENTITY_TURTLE = 49;
+	public static final int HARDBLOCK_TYPE_1 = 0x55;
+	public static final int HARDBLOCK_TYPE_2 = 0x73;
+	public static final int HARDBLOCK_TYPE_3 = 0x74;
 	private static final int ENTITY_BLUE_BARRIER = 34;
 	private static final int ENTITY_RED_BARRIER = 35;
 	private static final int ENTITY_BARRIER_TOGGLE_SWITCH = 18;
